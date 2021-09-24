@@ -8,7 +8,9 @@ import java.util.List;
 public interface ServiziCarrello {
 
     List<Carrello> getAllCarrelli();
-    Carrello creaCarrello(List<NotaSpesa> listaSpesa);
+    Carrello creaCarrello(NotaSpesa listaSpesa);
     Carrello findCarrelloById(String carr_id);
+    void deleteCarrelloById(String carr_id);
+    void updateCarrello(Carrello carrello);
 
 }

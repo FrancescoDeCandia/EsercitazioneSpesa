@@ -12,21 +12,29 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
+@Document(collection = "carrelli")
 public class Carrello {
+
     @Id
     String carr_id;
-    List<NotaSpesa> listaSpesa;
+    NotaSpesa listaSpesa;
     Date data;
     Float prezzoTot;
 
-    public Carrello(List<NotaSpesa> listaSpesa, Date data, Float prezzoTot) {
+    public Carrello(NotaSpesa listaSpesa, Date data, Float prezzoTot) {
         this.listaSpesa = listaSpesa;
         this.data = data;
         this.prezzoTot = prezzoTot;
     }
 
 
+    public Carrello(NotaSpesa notaSpesa) {
+        this.listaSpesa= notaSpesa;
+    }
 
+    public Carrello(String carr_id, NotaSpesa listaSpesa) {
+        this.carr_id = carr_id;
+        this.listaSpesa = listaSpesa;
+    }
 }
 

@@ -30,7 +30,7 @@ public class ControllerCarrello {
     }
 
     @PostMapping
-    ResponseEntity<Carrello> insertCarrello(@RequestBody List<NotaSpesa> listaSpesa){
+    ResponseEntity<Carrello> insertCarrello(@RequestBody NotaSpesa listaSpesa){
         Carrello carrello = serviziCarrello.creaCarrello(listaSpesa);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/carrelloManager/" + carrello.getCarr_id()).toUriString());
@@ -38,6 +38,20 @@ public class ControllerCarrello {
         log.info("Il carrello {} creato raggiungibile al link {} ", carrello.getCarr_id(), uri.toString());
         return ResponseEntity.created(uri).body(carrello);
     }
+
+    @DeleteMapping("/{carr_id}")
+    public ResponseEntity<?> deleteCarrello(@PathVariable String carr_id){
+        serviziCarrello.deleteCarrelloById(carr_id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{carr_id}")
+    public  ResponseEntity<?> updateCarrello(@PathVariable String carr_id, @RequestBody Carrello carrello){
+        serviziCarrello.updateCarrello(carrello);
+        return ResponseEntity.ok().body(carrello);
+    }
+
+
 
 //    @GetMapping("/ricerca/{anno}")
 //    ResponseEntity<List<Carrello>> getAllCarrelliByAnno(@PathVariable Integer anno) {
