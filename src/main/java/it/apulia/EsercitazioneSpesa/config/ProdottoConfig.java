@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Configuration
@@ -34,8 +35,8 @@ public class ProdottoConfig {
             lista.add(prodSpesa2);
             NotaSpesa notaSpesa1 = new NotaSpesa(lista);
 
-            Date data1 = new Date();
-            Date data2 = new Date();
+            LocalDate data1 = LocalDate.now();
+            LocalDate data2 =LocalDate.now();
 
             Carrello carrello1 = new Carrello(notaSpesa1, data1, 65F);
 

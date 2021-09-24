@@ -38,8 +38,8 @@ public class ControllerProdotto {
         return ResponseEntity.created(uri).body(prodotto);
     }
 
-    @PutMapping("/{nomeProd}")
-    ResponseEntity<?> updateProdotto(@PathVariable String nomeProd, @RequestBody Prodotto prodotto){
+    @PutMapping("/{prod_id}")
+    ResponseEntity<?> updateProdotto(@PathVariable String prod_id, @RequestBody Prodotto prodotto){
         serviziProdotto.updateProdotto(prodotto);
         return ResponseEntity.ok().build();
     }

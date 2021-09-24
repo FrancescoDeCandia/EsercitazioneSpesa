@@ -2,7 +2,6 @@ package it.apulia.EsercitazioneSpesa.controller;
 
 import it.apulia.EsercitazioneSpesa.model.Carrello;
 import it.apulia.EsercitazioneSpesa.model.NotaSpesa;
-import it.apulia.EsercitazioneSpesa.model.Prodotto;
 import it.apulia.EsercitazioneSpesa.servizi.ServiziCarrello;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +50,11 @@ public class ControllerCarrello {
         return ResponseEntity.ok().body(carrello);
     }
 
+    @GetMapping("/listaCarrelliPerAnno/{anno}")
+    public ResponseEntity<?> findCarrelloByAnno(@PathVariable Integer anno){
 
+        return ResponseEntity.ok().body(serviziCarrello.calcoloBilancio(anno));
+    }
 
 //    @GetMapping("/ricerca/{anno}")
 //    ResponseEntity<List<Carrello>> getAllCarrelliByAnno(@PathVariable Integer anno) {

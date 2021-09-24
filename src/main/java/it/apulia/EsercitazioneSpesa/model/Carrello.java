@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +19,10 @@ public class Carrello {
     @Id
     String carr_id;
     NotaSpesa listaSpesa;
-    Date data;
+    LocalDate data;
     Float prezzoTot;
 
-    public Carrello(NotaSpesa listaSpesa, Date data, Float prezzoTot) {
+    public Carrello(NotaSpesa listaSpesa, LocalDate data, Float prezzoTot) {
         this.listaSpesa = listaSpesa;
         this.data = data;
         this.prezzoTot = prezzoTot;
@@ -36,5 +37,13 @@ public class Carrello {
         this.carr_id = carr_id;
         this.listaSpesa = listaSpesa;
     }
+
+    public Carrello(String carr_id, NotaSpesa listaSpesa, LocalDate setData, float prezzoTot) {
+        this.carr_id = carr_id;
+        this.listaSpesa = listaSpesa;
+        this.data=setData;
+        this.prezzoTot=prezzoTot;
+    }
+
 }
 

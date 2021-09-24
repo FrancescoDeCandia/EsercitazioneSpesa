@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface RepProdotto extends MongoRepository<Prodotto, String> {
     @Query("{ 'nomeProd' :?0 }")
     Prodotto findProdottoByNome (String nomeProd);
+
+    @Query("{ 'prod_id' :?0 }")
+    Prodotto findProdottoById (String prod_id);
 }

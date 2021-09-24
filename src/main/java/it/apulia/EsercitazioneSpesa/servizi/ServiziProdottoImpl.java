@@ -1,13 +1,14 @@
 package it.apulia.EsercitazioneSpesa.servizi;
 
+import it.apulia.EsercitazioneSpesa.model.NotaSpesa;
 import it.apulia.EsercitazioneSpesa.model.Prodotto;
-import it.apulia.EsercitazioneSpesa.repository.RepCarrello;
 import it.apulia.EsercitazioneSpesa.repository.RepProdotto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -31,11 +32,14 @@ public class ServiziProdottoImpl  implements ServiziProdotto{
 
     @Override
     public void updateProdotto(Prodotto prodotto) {
-        if(this.findProdottoByNome(prodotto.getNomeProd()).equals(prodotto))
-            repositoryProdotto.save(prodotto);
-        else
-            log.error("Prodotto da aggiornare {} non presente all'interno del db", prodotto.getNomeProd());
-    }
+
+        if(!prodotto.getProd_id().equals(repositoryProdotto.findProdottoById(prodotto.getProd_id())))
+        {
+            Prodotto prodTemp = new Prodotto(prodotto.getProd_id(), prodotto.getNomeProd(), prodotto.getPrezzoProd());
+            repositoryProdotto.deleteById(prodotto.getProd_id());
+            this.insertProdotto(prodTemp);
+
+        } else log.error("Il prodotto da aggiornare non è presente all'interno del db");}
 
     @Override
     public void deleteProdotto(String prod_id) {
@@ -45,5 +49,10 @@ public class ServiziProdottoImpl  implements ServiziProdotto{
     @Override
     public Prodotto findProdottoByNome(String nomeProd) {
         return repositoryProdotto.findProdottoByNome(nomeProd);
+    }
+
+    @Override
+    public Optional<Prodotto> findProdottoById(String prod_id) {
+        return repositoryProdotto.findById(prod_id);
     }
 }
